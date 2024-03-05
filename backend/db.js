@@ -5,16 +5,17 @@
 
 
 
-import mongoose from "mogoose"
+import mongoose from 'mongoose';
+const { Schema } = mongoose;
 
-const schema = mongoose;
+mongoose.connect("mongodb+srv://swapy:swapnil@cluster0.crjtflw.mongodb.net/todos")
 
-const TodosSchema = new Schema({
+const todoSchema = new Schema({
     title :String,
     description: String,
-    completed :boolean
+    completed: Boolean
 })
 
-const Todo = mongoose.model('todo', TodosSchema)
+const todo = mongoose.model('todos', todoSchema)
 
-export default Todo;
+export default todo;

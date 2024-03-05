@@ -4,18 +4,17 @@
 
 import express from "express";
 import createTodo from "./type.js"
-const app = express();
+import Todo from "./db.js";
 
+const app = express();
 app.use(express.json())
 
 // body 
 // title : string
 // description : string
 
+app.post('/todos', async (req, res) => {
 
-
-
-app.post('/todos', (req, res) => {
     // store payload from req body
     const createPayload = req.body
 
@@ -30,11 +29,25 @@ app.post('/todos', (req, res) => {
         return
  }
 
+ await Todo.create({
+    title: createPayload.title,
+    description: createPayload.description,
+    completed: false
+ })
+
+ res.json({
+    msg: "Todo created"
+ })
+
 })
 
 
-app.get("todos", (req, res) => {
-    
+app.get("/todos", async (req, res) => {
+    const todos = await todo.find({})
+
+    res.json({
+        todos
+    })
 })
 
 
@@ -47,6 +60,10 @@ app.put("/completed", (req, res) => {
             })
             return
         }
+
+        // here update todo as completed
+
+        // return json response as a compelted todo list
 })
 
 app.listen(3001, () => {

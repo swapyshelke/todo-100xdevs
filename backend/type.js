@@ -22,5 +22,6 @@ const updateTodo = zod.object({
 })
 
 export default {
-    createTodo, updateTodo
+    createTodo: createTodo,
+    updateTodo: updateTodo
 }
